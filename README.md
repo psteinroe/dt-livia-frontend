@@ -31,6 +31,7 @@ firebase deploy
 + [Vue Docs](https://vuejs.org/v2/guide/)
 + [Vue Router Docs](https://router.vuejs.org)
 + [Vuetify - Material Design for Vue.js Docs](https://vuetifyjs.com/en/getting-started/quick-start)
++ [Vue Firestore Binding](https://github.com/gdg-tangier/vue-firestore)
 ### Stuff that is nice to understand
 + [eslint](https://eslint.org)
 + [webpack](http://webpack.github.io)
