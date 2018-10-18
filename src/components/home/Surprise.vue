@@ -3,7 +3,7 @@
         <v-layout row>
             <v-flex xs12>
                 <div class="text-xs-center">
-                    <v-img :src="imageSrc" contain/>
+                    <v-img :src="imageSrc" lazy-src="lazy" contain/>
                 </div>
             </v-flex>
         </v-layout>
@@ -21,13 +21,15 @@ export default {
     name: 'Surprise',
     data () {
         return {
-            imageSrc: ''
+            imageSrc: '',
+            lazy: 'https://media.giphy.com/media/cZDRRGVuNMLOo/giphy.gif'
         }
     },
     methods: {
         getUrl: function () {
             api.methods.fetchCatGif()
                 .then(data => { this.imageSrc = data })
+                .catch(reason => { this.imageSrc = 'https://media1.giphy.com/media/9r6EEb8o1bJFQeHTxP/giphy.gif' })
         }
     },
     beforeMount () {
