@@ -1,7 +1,5 @@
 import firebase from 'firebase'
 
-console.log(process.env)
-
 const config = {
     apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
     authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
@@ -16,6 +14,9 @@ firebase.initializeApp(config)
 const firestore = firebase.firestore()
 firestore.settings({timestampsInSnapshots: true})
 
+const auth = firebase.auth()
+
 export {
-    firestore
+    firestore,
+    auth
 }
