@@ -20,6 +20,10 @@ npm run build --report
 # run unit tests
 npm run unit
 
+# deploy locally
+npm install -g serve
+serve dist
+
 # deploy to firebase (AFTER BUILDING)
 firebase deploy
 ```
