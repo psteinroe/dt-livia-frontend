@@ -11,9 +11,7 @@ export default {
     name: 'Surprise',
     data () {
         return {
-            loading: false,
-            imageSrc: '',
-            error: null
+            imageSrc: ''
         }
     },
     methods: {
