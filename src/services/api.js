@@ -2,7 +2,7 @@ const api = {
     methods: {
         fetchCatGif: async function () {
             let response = await fetch(
-                'https://api.giphy.com/v1/gifs/random?api_key=nU03NUtfcI8A8Y8a5urHbWINQ9MR3ojt&tag=cat&rating=G',
+                'https://api.giphy.com/v1/gifs/random?api_key=gtENIKwn3Mm9uN4JOIlU8CHaV80XwfhN&tag=cat&rating=G',
                 {
                     method: 'GET',
                     contentType: 'application/json; charset=utf-8',

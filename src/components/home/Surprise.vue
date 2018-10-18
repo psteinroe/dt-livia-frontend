@@ -1,9 +1,17 @@
 <template>
-    <v-layout align-center justify-center column>
-        <img :src="imageSrc" />
-        <v-flex xs12>
-            <v-btn absolute color="#FF5959" dark v-on:click="getUrl">Give me a new one!</v-btn>
-        </v-flex>
+    <v-layout column>
+        <v-layout row>
+            <v-flex xs12>
+                <div class="text-xs-center">
+                    <v-img :src="imageSrc" contain/>
+                </div>
+            </v-flex>
+        </v-layout>
+        <v-layout row>
+            <v-flex xs12>
+                <v-btn absolute color="#FF5959" dark v-on:click="getUrl">Give me a new one!</v-btn>
+            </v-flex>
+        </v-layout>
     </v-layout>
 </template>
 
@@ -30,7 +38,7 @@ export default {
 
 <style scoped>
 button {
+    bottom: 64px;
     left: 25%;
-    bottom: 72px;
 }
 </style>
