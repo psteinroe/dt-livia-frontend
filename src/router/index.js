@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Home from '@/components/home/Home'
 import Notes from '@/components/home/Notes'
+import NewNote from '@/components/home/NewNote'
 import Saved from '@/components/home/Saved'
 import Calendar from '@/components/home/Calendar'
 import Surprise from '@/components/home/Surprise'
@@ -49,6 +50,15 @@ export default new Router({
             meta: {
                 showBackButton: true,
                 title: 'Your Notes'
+            }
+        },
+        {
+            path: '/NewNote',
+            name: 'Note',
+            component: NewNote,
+            meta: {
+                showBackButton: true,
+                title: 'New Note'
             }
         },
         {

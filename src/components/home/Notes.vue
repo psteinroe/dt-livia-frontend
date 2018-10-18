@@ -11,6 +11,9 @@
                     </v-list-tile-content>
             </v-list-tile>
         </v-list>
+        <router-link to="/NewNote">
+            <span class="subheading font-weight-bold">New Note</span>
+        </router-link>
     </div>
  </v-layout>
 </template>
