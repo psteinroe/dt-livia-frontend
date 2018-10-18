@@ -2,7 +2,7 @@
     <v-layout align-center justify-center column>
         <img :src="imageSrc" />
         <v-flex xs12>
-            <v-btn v-on:click="getUrl" color="success">Give me a new one!</v-btn>
+            <v-btn absolute color="#FF5959" dark v-on:click="getUrl">Give me a new one!</v-btn>
         </v-flex>
     </v-layout>
 </template>
@@ -30,8 +30,7 @@ export default {
 
 <style scoped>
 button {
-    position: absolute;
-    right: 25%;
+    left: 25%;
     bottom: 72px;
 }
 </style>
