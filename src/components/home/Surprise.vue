@@ -3,7 +3,7 @@
         <v-layout row>
             <v-flex xs12>
                 <div class="text-xs-center">
-                    <v-img :src="imageSrc" lazy-src="lazy" contain/>
+                    <v-img :src="imageSrc" contain/>
                 </div>
             </v-flex>
         </v-layout>
@@ -17,8 +17,10 @@
 
 <script>
 import {api} from '../../services'
+
 export default {
     name: 'Surprise',
+    mixins: [api],
     data () {
         return {
             imageSrc: '',
@@ -26,13 +28,16 @@ export default {
         }
     },
     methods: {
-        getUrl: function () {
-            api.methods.fetchCatGif()
-                .then(data => { this.imageSrc = data })
-                .catch(reason => { this.imageSrc = 'https://media1.giphy.com/media/9r6EEb8o1bJFQeHTxP/giphy.gif' })
+        getUrl: async function () {
+            try {
+                const sImgSrc = await this.fetchCatGif()
+                this.imageSrc = sImgSrc
+            } catch (err) {
+                this.imageSrc = this.lazy
+            }
         }
     },
-    beforeMount () {
+    created () {
         this.getUrl()
     }
 }
