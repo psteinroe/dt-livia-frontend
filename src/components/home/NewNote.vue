@@ -7,7 +7,6 @@
                 <br>
                 <textarea v-model="content" placeholder="Content"/>
                 <button type="submit">Add Note</button>
-                <p>title is: {{ title }} / content is {{ content }} / timestamp {{ time }} </p>
                 <p> {{ success }} </p>
             </form>
         </v-flex>
