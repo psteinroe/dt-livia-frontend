@@ -5,6 +5,7 @@ import Register from '@/components/Register'
 import Home from '@/components/home/Home'
 import Main from '@/components/Main'
 import Notes from '@/components/home/Notes'
+import NewNote from '@/components/home/NewNote'
 import Saved from '@/components/home/Saved'
 import Calendar from '@/components/home/Calendar'
 import Surprise from '@/components/home/Surprise'
@@ -57,6 +58,15 @@ const router = new Router({
                         showBackButton: true,
                         title: 'Your Notes',
                         requiresAuth: true
+                    }
+                },
+                {
+                    path: '/NewNote',
+                    name: 'Note',
+                    component: NewNote,
+                    meta: {
+                        showBackButton: true,
+                        title: 'New Note'
                     }
                 },
                 {
