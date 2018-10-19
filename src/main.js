@@ -6,18 +6,23 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import VueFirestore from 'vue-firestore'
+import {auth} from './services'
 
 Vue.use(VueFirestore)
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-const root = new Vue({
-    router,
-    render: h => h(App)
-})
+let root
 
-document.addEventListener('DOMContentLoaded', () => {
-    root.$mount('#app')
+auth.onAuthStateChanged(user => {
+    if (!root) {
+        /* eslint-disable no-new */
+        root = new Vue({
+            el: '#app',
+            template: '<App/>',
+            components: { App },
+            router
+        })
+    }
 })
