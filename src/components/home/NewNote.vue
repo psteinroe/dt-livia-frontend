@@ -2,12 +2,11 @@
 <v-layout column>
     <div class="scroll-container">
         <v-flex xs12> 
-            <form @submit.prevent="addNote(content, title)">
-                <input class="input-field col s12" v-model="title" placeholder="Title" required>
+            <form @submit.prevent="addNote(content, title)" class="s">
+                <input class="input-field input-title" v-model="title" placeholder="Title" required full-width autofocus>
                 <br>
-                <textarea v-model="content" placeholder="Content"/>
-                <button type="submit">Add Note</button>
-                <p> {{ success }} </p>
+                <textarea class="input-content" v-model="content" placeholder="Content" required/>
+                <button type="submit" class="add-note">Save Note</button>
             </form>
         </v-flex>
     </div>
@@ -50,11 +49,50 @@ export default {
                 console.error('Error writing document: ', error)
             })
             this.success = 'Done.'
+            this.$router.go(-1)
+        },
+        updateNote: function (content, title) {
+            var noteRef = firestore.collection('notes').doc('sas')
+            // Set the "note" field of the city 'DC'
+            return noteRef.update({
+                content: this.content,
+                title: this.title
+            }).then(function () {
+                console.log('Document successfully updated!')
+            }).catch(function (error) {
+                // The document probably doesn't exist.
+                console.error('Error updating document: ', error)
+            })
         }
     }
 }
 </script>
 
 <style>
-
+.input-title {
+    width:80%;
+    background-color: 2px solid rgba(243, 243, 243, .8);
+    border-radius:5px;
+    font-size: 32px;
+}
+.input-content {
+    width:100%;
+    height:40vh;
+    font-size: 16px;
+}
+.add-note {
+    position:fixed;
+    right:3vw;
+    bottom:10vh;
+    width: 120px;
+    height: 32px;
+    
+    color: black;
+    text-decoration: none;
+    text-align: center; 
+    background-color:#FF5959;
+    color:white;
+    font-weight:bold;
+    border-radius:5px;
+}
 </style>
