@@ -34,6 +34,8 @@ const router = new Router({
             component: Register
         },
         {
+            path: '/',
+            component: Main,
             meta: {
                 requiresAuth: true
             },
