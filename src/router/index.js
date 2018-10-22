@@ -10,6 +10,7 @@ import Saved from '@/components/home/Saved'
 import Calendar from '@/components/home/Calendar'
 import Surprise from '@/components/home/Surprise'
 import Discover from '@/components/discover/Discover'
+import Articles from '@/components/articles/Articles'
 import Settings from '@/components/settings/Settings'
 
 import { auth } from '../services'
@@ -106,6 +107,16 @@ const router = new Router({
                     meta: {
                         showBackButton: false,
                         title: 'Discover',
+                        requiresAuth: true
+                    }
+                },
+                {
+                    path: '/articles/:catName',
+                    name: 'articles',
+                    component: Articles,
+                    meta: {
+                        showBackButton: true,
+                        title: 'Discover Articles',
                         requiresAuth: true
                     }
                 },
