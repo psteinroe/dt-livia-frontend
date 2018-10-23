@@ -1,18 +1,28 @@
 <template>
-    <v-layout column>
-        <v-layout row>
-            <v-flex xs12>
-                <div class="text-xs-center">
-                    <v-img :src="imageSrc" contain/>
-                </div>
-            </v-flex>
+<v-app>
+    <v-toolbar app>
+        <v-btn @click="$router.go(-1)" icon>
+            <v-icon>arrow_back</v-icon>
+        </v-btn>
+        <v-toolbar-title>Home</v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+        <v-layout column>
+            <v-layout row>
+                <v-flex xs12>
+                    <div class="text-xs-center">
+                        <v-img :src="imageSrc" contain/>
+                    </div>
+                </v-flex>
+            </v-layout>
+            <v-layout row>
+                <v-flex xs12>
+                    <v-btn absolute color="#FF5959" dark v-on:click="getUrl">Give me a new one!</v-btn>
+                </v-flex>
+            </v-layout>
         </v-layout>
-        <v-layout row>
-            <v-flex xs12>
-                <v-btn absolute color="#FF5959" dark v-on:click="getUrl">Give me a new one!</v-btn>
-            </v-flex>
-        </v-layout>
-    </v-layout>
+    </v-content>
+</v-app>
 </template>
 
 <script>

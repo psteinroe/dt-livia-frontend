@@ -3,22 +3,22 @@
     <v-flex xs12>
         <v-layout row wrap>
             <v-flex xs6>
-                <router-link to="/Notes">
+                <router-link to="/notes">
                     <span class="subheading font-weight-bold">Notes</span>
                 </router-link>
             </v-flex>
             <v-flex xs6>
-                <router-link to="/Saved">
+                <router-link to="/saved">
                     <span class="subheading font-weight-bold">Saved Articles</span>
                 </router-link>
             </v-flex>
             <v-flex xs6>
-                <router-link to="/Calendar">
+                <router-link to="/calendar">
                     <span class="subheading font-weight-bold">Calendar</span>
                 </router-link>
             </v-flex>
             <v-flex xs6>
-                <router-link to="/Surprise">
+                <router-link to="/surprise">
                     <span class="subheading font-weight-bold">Surprise me</span>
                 </router-link>
             </v-flex>

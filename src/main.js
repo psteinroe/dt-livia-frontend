@@ -7,9 +7,13 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import VueFirestore from 'vue-firestore'
 import {auth} from './services'
+import SocialSharing from 'vue-social-sharing'
 
+Vue.use(SocialSharing)
 Vue.use(VueFirestore)
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+    iconfont: 'fa'
+})
 
 Vue.config.productionTip = false
 
