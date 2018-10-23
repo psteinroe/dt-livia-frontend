@@ -6,7 +6,7 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import VueFirestore from 'vue-firestore'
-import {auth} from './services'
+import {auth, firestore} from './services'
 import SocialSharing from 'vue-social-sharing'
 
 Vue.use(SocialSharing)
@@ -19,7 +19,25 @@ Vue.config.productionTip = false
 
 let root
 
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged(async user => {
+    async function createDocIfNotExists () {
+        // Check if there is a document for me
+        const userRef = firestore.collection('users').doc(user.uid)
+        try {
+            await userRef.get()
+        } catch (err) {
+            console.warn(err.message)
+        } finally {
+            const oUser = user.toJSON()
+            const oRelevantUserData = {
+                email: oUser.email
+            }
+            await userRef.set(oRelevantUserData)
+        }
+    }
+    createDocIfNotExists()
+    // Make my user id globally available
+    Vue.prototype.$userId = user.uid
     if (!root) {
         /* eslint-disable no-new */
         root = new Vue({

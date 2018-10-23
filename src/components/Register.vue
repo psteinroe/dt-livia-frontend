@@ -50,7 +50,7 @@ export default {
     methods: {
         register: async function () {
             try {
-                auth.createUserWithEmailAndPassword(this.email, this.password)
+                await auth.createUserWithEmailAndPassword(this.email, this.password)
                 this.$router.replace('main')
             } catch (err) {
                 console.error(err)

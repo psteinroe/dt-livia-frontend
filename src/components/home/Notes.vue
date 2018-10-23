@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { firestore } from '../../services'
+import {firestore} from '../../services'
 import formatter from '../../mixins/formatter'
 export default {
     name: 'Notes',
@@ -63,7 +63,7 @@ export default {
     },
     firestore () {
         return {
-            notes: firestore.collection('notes').orderBy('timestamp', 'desc')
+            notes: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'note')
         }
     },
     computed: {
@@ -78,7 +78,15 @@ export default {
     },
     methods: {
         onNoteClicked (note) {
-            this.$router.push({name: 'note', params: {noteId: note['.key'], note: note}})
+            this.$router.push({
+                name: 'note',
+                params: {
+                    noteId: note['.key'],
+                    title: note.title,
+                    content: note.content,
+                    timestamp: note.timestamp
+                }
+            })
         },
         onAdd () {
             this.$router.push({
