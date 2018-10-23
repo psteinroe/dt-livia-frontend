@@ -121,6 +121,10 @@ const webpackConfig = merge(baseWebpackConfig, {
         {
             urlPattern: /^https:\/\/code\.getmdl\.io\//,
             handler: 'cacheFirst'
+        },
+        {
+            urlPattern: /^https:\/\/firestore\.googleapis\.com\//,
+            handler: 'cacheFirst'
         }]
     })
   ]
