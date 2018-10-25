@@ -8,7 +8,9 @@ import 'vuetify/dist/vuetify.min.css'
 import VueFirestore from 'vue-firestore'
 import {auth, firestore} from './services'
 import SocialSharing from 'vue-social-sharing'
+import AsyncComputed from 'vue-async-computed'
 
+Vue.use(AsyncComputed)
 Vue.use(SocialSharing)
 Vue.use(VueFirestore)
 Vue.use(Vuetify, {
@@ -20,14 +22,14 @@ Vue.config.productionTip = false
 let root
 
 auth.onAuthStateChanged(async user => {
+    // The following is not best practice. Normally you should deploy a serverless function for this!
     async function createDocIfNotExists () {
-        // Check if there is a document for me
+        // Check if there is a document for me. If not, create it.
         const userRef = firestore.collection('users').doc(user.uid)
         try {
             await userRef.get()
         } catch (err) {
             console.warn(err.message)
-        } finally {
             const oUser = user.toJSON()
             const oRelevantUserData = {
                 email: oUser.email

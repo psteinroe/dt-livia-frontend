@@ -13,8 +13,8 @@
                 </router-link>
             </v-flex>
             <v-flex xs6>
-                <router-link to="/calendar">
-                    <span class="subheading font-weight-bold">Calendar</span>
+                <router-link to="/timeline">
+                    <span class="subheading font-weight-bold">Timeline</span>
                 </router-link>
             </v-flex>
             <v-flex xs6>
@@ -25,26 +25,31 @@
         </v-layout>
     </v-flex>
             <v-flex xs12>
-                <v-card class="main-tiles" color="#34BBDE">
-                    <v-card-text>
+                <v-card @click.native="onHospitalStayClick" class="main-tiles" color="#34BBDE">
+                    <v-card-text v-if="this.hospitalStay && this.hospitalStay[0] && this.hospitalStay[0].current">
                         <div class="subheading font-weight-bold">Your Hospital Stay</div>
                         <ul>
-                            <li><span class="font-weight-bold">Diagnose:</span> Coding Syndrome</li>
-                            <li><span class="font-weight-bold">Stay Since:</span> 10-10-2018 (4 days)</li>
-                            <li><span class="font-weight-bold">Related Articles:</span> 9</li>
-                            <li><span class="font-weight-bold">Related Notes:</span> 8</li>
+                            <li><span class="font-weight-bold">Diagnose:</span> {{this.hospitalStay[0].content}}</li>
+                            <li><span class="font-weight-bold">Stay Since:</span> {{getTimestampFormatted(this.hospitalStay[0].timestamp.toDate())}} ({{stayInDays}} Days)</li>
+                            <li><span class="font-weight-bold">Related Articles:</span> {{this.hospitalStay[0].relatedArticlesCount}}</li>
+                            <li><span class="font-weight-bold">Related Notes:</span> {{this.hospitalStay[0].relatedNotesCount}}</li>
                         </ul>
+                    </v-card-text>
+                    <v-card-text v-else>
+                        <div class="subheading font-weight-bold">Add infos about your hospital stay...</div>
                     </v-card-text>
                 </v-card>
             </v-flex>
             <v-flex xs12>
-                <v-card class="main-tiles" color="#FF5959">
-                    <v-card-text>
+                <v-card to="/timeline" class="main-tiles" color="#FF5959">
+                    <v-card-text v-if="upcomingEvents.length > 0">
                         <div class="subheading font-weight-bold">Next Events</div>
                         <ul>
-                            <li><span class="font-weight-bold">Tomorrow, 9am:</span> Daily Doctor Visit</li>
-                            <li><span class="font-weight-bold">Thursday, 8am:</span> Blood Test (sober)</li>
+                            <li v-for="event in upcomingEvents" :key="event._id"><span class="font-weight-bold">{{getDisplayDate(event.timestamp.toDate())}}</span> {{event.title}}</li>
                         </ul>
+                    </v-card-text>
+                    <v-card-text v-else>
+                        <div class="subheading font-weight-bold">No events by now. Start adding appointments in the calendar..</div>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -60,9 +65,77 @@
 </template>
 
 <script>
+import {firestore} from '../../services'
+import formatter from '../../mixins/formatter'
 
 export default {
-    name: 'Home'
+    name: 'Home',
+    mixins: [formatter],
+    firestore () {
+        return {
+            user: firestore.collection('users').doc(this.$userId),
+            hospitalStay: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'hospital').orderBy('timestamp', 'desc').limit(1),
+            upcomingEvents: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'event').where('timestamp', '>=', new Date()).orderBy('timestamp', 'asc')
+        }
+    },
+    computed: {
+        stayInDays () {
+            if (this.hospitalStay[0]) {
+                const oDate = this.hospitalStay[0].timestamp.toDate()
+                const oNow = new Date()
+                const fTimeDiff = Math.abs(oDate.getTime() - oNow.getTime())
+                const iDiffDays = Math.ceil(fTimeDiff / (1000 * 3600 * 24))
+                return iDiffDays
+            } else {
+                return ''
+            }
+        }
+    },
+    methods: {
+        onHospitalStayClick () {
+            if (!this.hospitalStay[0] || !this.hospitalStay[0].current) {
+                this.$router.push({
+                    name: 'hospitalStay',
+                    params: {
+                        stayId: 'newstay'
+                    }
+                })
+            } else {
+                this.$router.push({
+                    name: 'hospitalStay',
+                    params: {
+                        stayId: this.hospitalStay[0]['.key']
+                    }
+                })
+            }
+        },
+        getDisplayDate (oDate) {
+            let s = ''
+
+            const oToday = new Date()
+            const fTimeDiff = Math.abs(oDate.getTime() - oToday.getTime())
+            const iDiffDays = Math.ceil(fTimeDiff / (1000 * 3600 * 24))
+            if (iDiffDays === 0) {
+                s += 'Today'
+            } else if (iDiffDays === 1) {
+                s += 'Tomorrow'
+            } else {
+                const iWeekday = oDate.getDay()
+                const aWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                s += aWeekdays[iWeekday]
+            }
+
+            s += ', '
+
+            const iHour = oDate.getHours()
+            if (iHour <= 12) s += iHour + 'am'
+            else s += (iHour - 12) + 'pm'
+
+            s += ':'
+
+            return s
+        }
+    }
 }
 </script>
 

@@ -1,11 +1,8 @@
 <template>
-    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-        <v-btn slot="activator" icon>
-            <v-icon>share</v-icon>
-        </v-btn>
+    <v-dialog v-model="show" fullscreen hide-overlay transition="dialog-bottom-transition">
         <v-card>
             <v-toolbar>
-                <v-btn icon @click.native="dialog = false">
+                <v-btn icon @click.stop="show=false">
                     <v-icon>close</v-icon>
                 </v-btn>
                 <v-toolbar-title>Share</v-toolbar-title>
@@ -122,20 +119,21 @@
 <script>
 export default {
     name: 'Share',
-
-    props: {
-        title: {
-            type: String,
-            required: false
-        },
-        description: {
-            type: String,
-            required: false
+    props: ['title', 'description', 'visible'],
+    computed: {
+        show: {
+            get () {
+                return this.visible
+            },
+            set (val) {
+                if (!val) {
+                    this.$emit('close')
+                }
+            }
         }
     },
     data () {
         return {
-            dialog: false,
             socialSharing: {
                 hashtags: 'gettingwell,livia,hospitalcompanion,myfavouriteapp,digitalhealthcare',
                 twitterUser: 'livia_health',

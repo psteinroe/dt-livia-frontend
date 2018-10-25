@@ -17,6 +17,7 @@ firestore.settings({timestampsInSnapshots: true})
 const auth = firebase.auth()
 
 export {
+    firebase,
     firestore,
     auth
 }

@@ -10,6 +10,9 @@ import Note from '@/components/home/Note'
 import Surprise from '@/components/home/Surprise'
 import Discover from '@/components/discover/Discover'
 import Settings from '@/components/settings/Settings'
+import Timeline from '@/components/home/Timeline'
+import HospitalStay from '@/components/home/HospitalStay'
+import Event from '@/components/home/Event'
 
 import { auth } from '../services'
 
@@ -66,6 +69,24 @@ const router = new Router({
             ]
         },
         {
+            path: '/timeline',
+            name: 'timeline',
+            component: Timeline,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/events/:eventId',
+            name: 'event',
+            component: Event,
+            components: { default: Event, share: Share },
+            props: { default: true, share: false },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
             path: '/notes',
             name: 'notes',
             component: Notes,
@@ -86,6 +107,16 @@ const router = new Router({
             path: '/surprise',
             name: 'surprise',
             component: Surprise,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/hospitalStay/:stayId',
+            name: 'hospitalStay',
+            components: { default: HospitalStay, share: Share },
+            props: { default: true, share: false },
+            component: HospitalStay,
             meta: {
                 requiresAuth: true
             }

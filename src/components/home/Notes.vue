@@ -6,19 +6,18 @@
             </v-btn>
             <v-toolbar-title class="subheading">Home</v-toolbar-title>
         </v-toolbar>
+        <v-btn
+            fixed
+            dark
+            fab
+            bottom
+            right
+            color="red"
+            @click="onAdd">
+                <v-icon>add</v-icon>
+            </v-btn>
         <v-content>
             <v-container fluid>
-                <v-btn
-                fixed
-                dark
-                fab
-                bottom
-                right
-                color="red"
-                @click="onAdd">
-                    <v-icon>add</v-icon>
-                </v-btn>
-
                 <v-layout column>
                     <v-flex xs12>
                         <div class="headline font-weight-bold">Notes</div>
@@ -36,7 +35,7 @@
                                 @click="onNoteClicked(item)">
                                     <v-list-tile-content>
                                         <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
-                                        <v-list-tile-sub-title class="caption"><span class="text--primary">{{getTimestampFormatted(item)}}</span> - {{ item.content }}</v-list-tile-sub-title>
+                                        <v-list-tile-sub-title class="caption"><span class="text--primary">{{getTimestampFormatted(item.timestamp.toDate())}}</span> - {{ item.content }}</v-list-tile-sub-title>
                                     </v-list-tile-content>
                                 </v-list-tile>
                             </template>
@@ -63,7 +62,7 @@ export default {
     },
     firestore () {
         return {
-            notes: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'note')
+            notes: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'note').orderBy('timestamp', 'desc')
         }
     },
     computed: {
@@ -77,14 +76,11 @@ export default {
         }
     },
     methods: {
-        onNoteClicked (note) {
+        async onNoteClicked (note) {
             this.$router.push({
                 name: 'note',
                 params: {
-                    noteId: note['.key'],
-                    title: note.title,
-                    content: note.content,
-                    timestamp: note.timestamp
+                    noteId: note['.key']
                 }
             })
         },
