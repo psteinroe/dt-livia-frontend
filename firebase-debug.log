@@ -1,0 +1,33 @@
+[debug] [2018-10-25T14:03:12.828Z] ----------------------------------------------------------------------
+[debug] [2018-10-25T14:03:12.830Z] Command:       /Users/philippsteinroetter/.nvm/versions/node/v9.8.0/bin/node /Users/philippsteinroetter/.nvm/versions/node/v9.8.0/bin/firebase deploy
+[debug] [2018-10-25T14:03:12.831Z] CLI Version:   5.1.1
+[debug] [2018-10-25T14:03:12.831Z] Platform:      darwin
+[debug] [2018-10-25T14:03:12.831Z] Node Version:  v9.8.0
+[debug] [2018-10-25T14:03:12.831Z] Time:          Thu Oct 25 2018 16:03:12 GMT+0200 (CEST)
+[debug] [2018-10-25T14:03:12.831Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-10-25T14:03:12.844Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-10-25T14:03:12.844Z] > authorizing via signed-in user
+[debug] [2018-10-25T14:03:12.844Z] [iam] checking project dt-livia for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2018-10-25T14:03:12.846Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/dt-livia:testIamPermissions  
+
+[debug] [2018-10-25T14:03:13.783Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-25T14:03:13.785Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/dt-livia  
+ 
+[debug] [2018-10-25T14:03:14.110Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'dt-livia'...
+[info] 
+[info] i  deploying hosting
+[debug] [2018-10-25T14:03:14.114Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/dt-livia/versions  
+
+[debug] [2018-10-25T14:03:15.435Z] <<< HTTP RESPONSE 200
+[info] i  hosting[dt-livia]: beginning deploy...
+[info] i  hosting[dt-livia]: found 29 files in dist
+[debug] [2018-10-25T14:03:16.711Z] [hosting] hash cache [ZGlzdA] stored for 29 files
+[debug] [2018-10-25T14:03:16.712Z] [hosting][hash queue][FINAL]
+[debug] [2018-10-25T14:03:16.712Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/dt-livia/versions/e017fdd8c05aa26a:populateFiles  
+ <request body omitted>
+[debug] [2018-10-25T14:03:18.175Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-25T14:03:18.190Z] [hosting][populate queue][FINAL]
+[debug] [2018-10-25T14:03:18.190Z] [hosting] uploads queued: 27

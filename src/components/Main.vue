@@ -5,9 +5,9 @@
         </v-toolbar>
         <v-content>
             <div class="scroll-container">
-            <v-container fluid grid-list-xl>
-                <router-view></router-view>
-            </v-container>
+                <v-container fluid grid-list-xl>
+                    <router-view></router-view>
+                </v-container>
             </div>
         </v-content>
         <v-bottom-nav :active-sync="bottomNav" app :value="true" color="grey lighten-2">

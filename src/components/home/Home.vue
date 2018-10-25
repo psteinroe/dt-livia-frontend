@@ -53,11 +53,11 @@
                     </v-card-text>
                 </v-card>
             </v-flex>
-            <v-flex xs12>
-                <v-card class="main-tiles" color="#39967C">
+            <v-flex xs12 v-if="this.lastRead && this.lastRead[0]">
+                <v-card class="main-tiles" color="#39967C" :href="lastRead[0].url">
                     <v-card-text>
-                        <div class="subheading font-weight-bold">Last Read: LDL-Cholesterol</div>
-                        <p>Low-density lipoprotein (LDL) is one of the five major groups of lipoprotein which transport all fat molecules around the body... <span class="font-weight-bold">More</span></p>
+                        <div class="subheading font-weight-bold">Last Read: {{lastRead[0].title}}</div>
+                        <p>{{lastRead[0].content}}</p>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -75,10 +75,14 @@ export default {
         return {
             user: firestore.collection('users').doc(this.$userId),
             hospitalStay: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'hospital').orderBy('timestamp', 'desc').limit(1),
+            lastRead: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'article').orderBy('timestamp', 'desc').limit(1),
             upcomingEvents: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'event').where('timestamp', '>=', new Date()).orderBy('timestamp', 'asc')
         }
     },
     computed: {
+        lastReadTest () {
+
+        },
         stayInDays () {
             if (this.hospitalStay[0]) {
                 const oDate = this.hospitalStay[0].timestamp.toDate()
@@ -92,6 +96,9 @@ export default {
         }
     },
     methods: {
+        onLastReadClick (url) {
+            window.open(url)
+        },
         onHospitalStayClick () {
             if (!this.hospitalStay[0] || !this.hospitalStay[0].current) {
                 this.$router.push({

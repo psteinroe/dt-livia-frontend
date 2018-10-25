@@ -11,9 +11,10 @@ import Surprise from '@/components/home/Surprise'
 import Discover from '@/components/discover/Discover'
 import Settings from '@/components/settings/Settings'
 import Timeline from '@/components/home/Timeline'
+import Saved from '@/components/home/Saved'
 import HospitalStay from '@/components/home/HospitalStay'
 import Event from '@/components/home/Event'
-
+import Institutions from '@/components/discover/Institutions'
 import { auth } from '../services'
 
 Vue.use(Router)
@@ -82,6 +83,24 @@ const router = new Router({
             component: Event,
             components: { default: Event, share: Share },
             props: { default: true, share: false },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/institutions/:catName',
+            name: 'institutions',
+            component: Institutions,
+            components: { default: Institutions },
+            props: { default: true },
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: '/saved',
+            name: 'saved',
+            component: Saved,
             meta: {
                 requiresAuth: true
             }

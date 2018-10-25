@@ -85,6 +85,10 @@ export default {
                 return 'orange'
             case 'event':
                 return 'blue'
+            case 'hospital':
+                return 'red'
+            case 'article':
+                return 'white'
             default:
                 return 'black'
             }
