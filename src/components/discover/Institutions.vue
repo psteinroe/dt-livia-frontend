@@ -13,7 +13,7 @@
                     </v-flex>
 
                     <v-flex
-                    v-for="(item) in institutionsDisplay"
+                    v-for="(item) in institutions"
                     xs12
                     :key="item['.key']">
                     <v-card>
@@ -50,26 +50,11 @@ export default {
             required: true
         }
     },
-    data () {
-        return {
-            institutions: []
-        }
-    },
     firestore () {
         return {
             institutions: firestore.collection('institutions').where('category', '==', this.catName),
             savedInstitutions: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'article'),
             activities: firestore.collection('users').doc(this.$userId).collection('activities')
-        }
-    },
-    computed: {
-        institutionsDisplay: function () {
-            const aInstitutionsToDisplay = this.institutions.reduce((prev, curr, index, array) => {
-                if (index !== 0 && index !== array.length) prev.push({divider: true})
-                prev.push(curr)
-                return prev
-            }, [])
-            return aInstitutionsToDisplay
         }
     },
     methods: {
