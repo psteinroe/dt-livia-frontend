@@ -38,14 +38,17 @@ auth.onAuthStateChanged(async user => {
                 }
                 await userRef.set(oRelevantUserData)
             }
-            // Make my user id globally available
-            Vue.prototype.$userId = user.uid
         } else {
             console.log('No user found...')
             router.push('/login')
         }
     }
     createDocIfNotExists()
+
+    if (user) {
+        // Make my user id globally available
+        Vue.prototype.$userId = user.uid
+    }
 
     if (!root) {
         /* eslint-disable no-new */
