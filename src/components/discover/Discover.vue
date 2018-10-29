@@ -1,21 +1,24 @@
 <template>
     <v-layout row wrap>
         <v-flex xs12>
-            <v-card>
+            <v-card class="ads-container">
                 <v-card-text class="overflow-hidden py-0">
                     <v-layout row align-content-center class="horiz-scroll">
-                    <v-flex
-                    v-for="offer in offers"
+
+                    <v-flex xs12 v-for="offer in offers"
                     :key="offer.id"
                     px-1
                     pb-2>
-                        <v-card height="100" width="200">
-                            <div class="img-container">
-                                <img :src="offer.img" height="100" width="200" contain="false">
-                                <div class="top-left title font-weight-bold">{{offer.title}}</div>
-                            </div>
+                        <v-card color="grey lighten-2" width="200" height="120" class="darkgrey--text ad-container">
+                            <v-img :src="offer.img" width="200" height="100" contain="false">
+                                <v-card-title primary-title>
+                                    <div class="headline font-weight-black">{{offer.title}}</div>
+                                    <div>{{offer.content}}</div>
+                                </v-card-title>
+                            </v-img>
                         </v-card>
                     </v-flex>
+
                     </v-layout>
                 </v-card-text>
             </v-card>
@@ -23,15 +26,10 @@
 
         <v-flex xs12 v-for="category in categories" :key="category['.key']">
             <v-card @click.native="onCatClick(category.name)">
-                <v-card class="img-container"><!-- :img="category.img">-->
-                    <v-img :src="category.img" height="100px"/>
-                    <div class="top-left subheading font-weight-bold">{{category.name}}</div>
-                </v-card>
+                <v-img :src="category.img" height="100px"/>
+                <div class="top-left title font-weight-black white--text">{{category.name}}</div>
             </v-card>
         </v-flex>
-
-
-
     </v-layout>
 </template>
 
@@ -55,8 +53,8 @@ export default {
                 },
                 {
                     id: 1,
-                    title: '1 photo for free',
-                    content: 'Or rather DM?',
+                    title: '1 photo free',
+                    content: 'Get one printed photo for free on your next visit',
                     img: '#',
                     imgRef: 'dm.png'
                 },
@@ -92,7 +90,7 @@ export default {
             // Point to categories in storage
             var imagesRef = firebase.storage().ref().child('categories/advertisements')
 
-            // iteratie over every element for horizontal slider
+            // iterate over every element for picture in horizontal slider
             this.offers.forEach(function (i) {
                 var spaceRef = imagesRef.child(i.imgRef)
                 spaceRef.getDownloadURL().then(function (url) {
@@ -127,5 +125,13 @@ export default {
 .card-text {
     height:100px;
     width:300px;
+}
+.ads-container {
+    background-color:#FAFAFA;
+    box-shadow: none;
+    height:120px;
+}
+.ad-container {
+    border-radius:5px;
 }
 </style>
