@@ -58,8 +58,9 @@ export default {
         login: async function () {
             try {
                 await auth.signInWithEmailAndPassword(this.email, this.password)
-                this.$router.replace('main')
+                this.$router.replace('/')
             } catch (err) {
+                alert(err.message)
                 console.error(err.message)
             }
         }
@@ -68,5 +69,4 @@ export default {
 </script>
 
 <style>
-
 </style>

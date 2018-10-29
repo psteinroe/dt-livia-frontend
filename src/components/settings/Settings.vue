@@ -57,7 +57,7 @@
           </v-list-tile>
           <v-list-tile>
             <v-list-tile-content>
-              <v-list-tile-title class="red--text">Delete Account</v-list-tile-title>
+              <v-list-tile-title @click="logout" class="red--text">Logout</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import {auth} from '../../services'
 
 export default {
     name: 'Settings',
@@ -76,6 +77,15 @@ export default {
             events: false,
             updates: false,
             newsletter: false
+        }
+    },
+    methods: {
+        logout: async function () {
+            await auth.signOut().then(function () {
+                // success
+            }, function (error) {
+                console.log(error)
+            })
         }
     }
 }

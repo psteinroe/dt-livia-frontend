@@ -30,6 +30,13 @@
                     <v-btn @click="register" block>Register</v-btn>
                 </v-flex>
             </v-layout>
+            <v-layout row justify-center>
+            <v-flex xs7 align-content-center>
+                <router-link to="/Login">
+                    <div>Already a user? Login here!</div>
+                </router-link>
+            </v-flex>
+        </v-layout>
         </v-layout>
             </v-container>
         </v-content>
@@ -51,8 +58,10 @@ export default {
         register: async function () {
             try {
                 await auth.createUserWithEmailAndPassword(this.email, this.password)
-                this.$router.replace('main')
+                alert('Registration successful. Please login')
+                this.$router.replace('/Login')
             } catch (err) {
+                alert(err.message)
                 console.error(err)
             }
         }
@@ -61,5 +70,4 @@ export default {
 </script>
 
 <style>
-
 </style>
