@@ -9,10 +9,12 @@
                     :key="offer.id"
                     px-1
                     pb-2>
-                        <div class="img-container">
-                            <img :src="offer.img" height="100" width="200">
-                            <div class="top-left subheading font-weight-bold">{{offer.title}}</div>
-                        </div>
+                        <v-card height="100" width="200">
+                            <div class="img-container">
+                                <img :src="offer.img" height="100" width="200" contain="false">
+                                <div class="top-left title font-weight-bold">{{offer.title}}</div>
+                            </div>
+                        </v-card>
                     </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -21,12 +23,10 @@
 
         <v-flex xs12 v-for="category in categories" :key="category['.key']">
             <v-card @click.native="onCatClick(category.name)">
-                <v-card-text>
-                    <div class="img-container">
-                            <img :src="category.img" height="100" width="200">
-                            <div class="top-left subheading font-weight-bold">{{category.name}}</div>
-                    </div>
-                </v-card-text>
+                <v-card class="img-container"><!-- :img="category.img">-->
+                    <v-img :src="category.img" height="100px"/>
+                    <div class="top-left subheading font-weight-bold">{{category.name}}</div>
+                </v-card>
             </v-card>
         </v-flex>
 
@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import { firestore } from '../../services'
+import { firestore, firebase } from '../../services'
+
 export default {
     name: 'Discover',
     data () {
@@ -49,14 +50,24 @@ export default {
                     id: 0,
                     title: '20% off',
                     content: 'Receive a free voucher for your next Rossmann visit',
-                    img: '#'
+                    img: '#',
+                    imgRef: 'rossmann.png'
+                },
+                {
+                    id: 1,
+                    title: '1 photo for free',
+                    content: 'Or rather DM?',
+                    img: '#',
+                    imgRef: 'dm.png'
                 },
                 {
                     id: 2,
-                    title: 'DM Coupon',
-                    content: 'Or rather DM?',
-                    img: '#'
+                    title: '5% off',
+                    content: 'Receive 5% off your next order',
+                    img: '#',
+                    imgRef: 'docmorris.png'
                 }
+
             ]
         }
     },
@@ -65,6 +76,9 @@ export default {
             categories: firestore.collection('categories')
         }
     },
+    created: function () {
+        this.changeImg()
+    },
     methods: {
         onCatClick: function (sCatName) {
             this.$router.push({
@@ -72,6 +86,18 @@ export default {
                 params: {
                     catName: sCatName
                 }
+            })
+        },
+        changeImg: function () {
+            // Point to categories in storage
+            var imagesRef = firebase.storage().ref().child('categories/advertisements')
+
+            // iteratie over every element for horizontal slider
+            this.offers.forEach(function (i) {
+                var spaceRef = imagesRef.child(i.imgRef)
+                spaceRef.getDownloadURL().then(function (url) {
+                    i.img = url
+                })
             })
         }
     }
@@ -97,5 +123,9 @@ export default {
     position: absolute;
     top: 26px;
     left: 26px;
+}
+.card-text {
+    height:100px;
+    width:300px;
 }
 </style>
