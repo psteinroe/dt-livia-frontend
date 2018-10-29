@@ -24,28 +24,38 @@ let root
 auth.onAuthStateChanged(async user => {
     // The following is not best practice. Normally you should deploy a serverless function for this!
     async function createDocIfNotExists () {
-        // Check if there is a document for me. If not, create it.
-        const userRef = firestore.collection('users').doc(user.uid)
-        try {
-            await userRef.get()
-        } catch (err) {
-            console.warn(err.message)
-            const oUser = user.toJSON()
-            const oRelevantUserData = {
-                email: oUser.email
+        if (user) {
+            // User found... get document
+            // Check if there is a document for me. If not, create it.
+            const userRef = firestore.collection('users').doc(user.uid)
+            try {
+                await userRef.get()
+            } catch (err) {
+                console.warn(err.message)
+                const oUser = user.toJSON()
+                const oRelevantUserData = {
+                    email: oUser.email
+                }
+                await userRef.set(oRelevantUserData)
             }
-            await userRef.set(oRelevantUserData)
+        } else {
+            console.log('No user found...')
+            router.push('/login')
         }
     }
     createDocIfNotExists()
-    // Make my user id globally available
-    Vue.prototype.$userId = user.uid
+
+    if (user) {
+        // Make my user id globally available
+        Vue.prototype.$userId = user.uid
+    }
+
     if (!root) {
         /* eslint-disable no-new */
         root = new Vue({
             el: '#app',
             template: '<App/>',
-            components: { App },
+            components: {App},
             router
         })
     }
