@@ -135,6 +135,6 @@ export default {
     height:120px;
 }
 .ad-container {
-    border-radius:5px;
+    border-radius:10px;
 }
 </style>
