@@ -6,12 +6,17 @@
             </v-btn>
             <v-toolbar-title class="subheading">Home</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items>
-                <v-btn @click="onAdd" icon>
-                    <v-icon>add</v-icon>
-                </v-btn>
-            </v-toolbar-items>
         </v-toolbar>
+        <v-btn
+            fixed
+            dark
+            fab
+            bottom
+            right
+            color="red"
+            @click="onAdd">
+                <v-icon>add</v-icon>
+        </v-btn>
         <v-content>
             <v-container fluid grid-list-xl>
                 <v-layout column>
