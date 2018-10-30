@@ -2,19 +2,21 @@
     <v-layout row wrap>
         <v-flex xs12>
             <v-card class="ads-container">
-                <v-card-text class="overflow-hidden py-0">
+                <v-card-text class="overflow py-0">
                     <v-layout row align-content-center class="horiz-scroll">
 
                     <v-flex xs12 v-for="offer in offers"
                     :key="offer.id"
                     px-1
                     pb-2>
-                        <v-card color="grey lighten-2" width="200" height="120" class="darkgrey--text ad-container">
-                            <v-img :src="offer.img" width="200" height="100" contain="false">
-                                <v-card-title primary-title>
-                                    <div class="headline font-weight-black">{{offer.title}}</div>
-                                    <div>{{offer.content}}</div>
-                                </v-card-title>
+                        <v-card class="white--text ads-container">
+                            <v-img :src="adUrl" width="200" height="120" contain="false">
+                                <v-img :src="offer.img" width="200" height="120" contain="false">
+                                    <v-card-title primary-title>
+                                        <div class="headline font-weight-black">{{offer.title}}</div>
+                                        <div>{{offer.content}}</div>
+                                    </v-card-title>
+                                </v-img>
                             </v-img>
                         </v-card>
                     </v-flex>
@@ -26,7 +28,7 @@
 
         <v-flex xs12 v-for="category in categories" :key="category['.key']">
             <v-card @click.native="onCatClick(category.name)">
-                <v-img :src="category.img" height="100px"/>
+                <v-img :src="category.img" height="110px"/>
                 <div class="top-left title font-weight-black white--text">{{category.name}}</div>
             </v-card>
         </v-flex>
@@ -43,6 +45,7 @@ export default {
             loading: false,
             categories: [],
             error: null,
+            adUrl: 'https://firebasestorage.googleapis.com/v0/b/dt-livia.appspot.com/o/categories%2Fadvertisements%2Fa-gift.png?alt=media&token=96f21448-6912-4a1c-91d4-0e2e516a543f',
             offers: [
                 {
                     id: 0,
