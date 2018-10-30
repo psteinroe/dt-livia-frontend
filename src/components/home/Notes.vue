@@ -17,32 +17,34 @@
                 <v-icon>add</v-icon>
             </v-btn>
         <v-content>
-            <v-container fluid>
-                <v-layout column>
-                    <v-flex xs12>
-                        <div class="headline font-weight-bold">Notes</div>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-list two-line>
-                            <template v-for="(item, index) in notesDisplay">
-                                <v-divider
-                                v-if="item.divider"
-                                :inset="false"
-                                :key="index"/>
-                                <v-list-tile
-                                v-else
-                                :key="item._id"
-                                @click="onNoteClicked(item)">
-                                    <v-list-tile-content>
-                                        <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
-                                        <v-list-tile-sub-title class="caption"><span class="text--primary">{{getTimestampFormatted(item.timestamp.toDate())}}</span> - {{ item.content }}</v-list-tile-sub-title>
-                                    </v-list-tile-content>
-                                </v-list-tile>
-                            </template>
-                        </v-list>
-                    </v-flex>
-                </v-layout>
-            </v-container>
+            <div class="scroll-container">
+                <v-container fluid>
+                    <v-layout column>
+                        <v-flex xs12>
+                            <div class="headline font-weight-bold">Notes</div>
+                        </v-flex>
+                        <v-flex xs12>
+                            <v-list two-line>
+                                <template v-for="(item, index) in notesDisplay">
+                                    <v-divider
+                                    v-if="item.divider"
+                                    :inset="false"
+                                    :key="index"/>
+                                    <v-list-tile
+                                    v-else
+                                    :key="item._id"
+                                    @click="onNoteClicked(item)">
+                                        <v-list-tile-content>
+                                            <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
+                                            <v-list-tile-sub-title class="caption"><span class="text--primary">{{getTimestampFormatted(item.timestamp.toDate())}}</span> - {{ item.content }}</v-list-tile-sub-title>
+                                        </v-list-tile-content>
+                                    </v-list-tile>
+                                </template>
+                            </v-list>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </div>
         </v-content>
     </v-app>
 </template>

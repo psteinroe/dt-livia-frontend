@@ -13,34 +13,35 @@
             </v-toolbar-items>
         </v-toolbar>
         <v-content>
-            <v-container fluid grid-list-xl>
-                <v-layout column>
-                    <v-flex xs12>
-                        <div class="headline font-weight-bold">Hospital Timeline</div>
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-timeline dense clipped>
-                            <v-timeline-item
-                            v-for="activity in timelineData"
-                            :color="getTimelinePointColor(activity.type)"
-                            :key="activity['.key']"
-                            @click.native="onTimelineItemClick(activity)"
-                            small>
-                            <v-layout pt-3>
-                                <v-flex xs4>
-                                    <strong>{{getTimestampFormatted(activity.timestamp.toDate())}}</strong>
-                                </v-flex>
-                                <v-flex>
-                                    <strong>{{activity.title}}</strong>
-                                    <div class="caption">{{activity.content}}</div>
-                                </v-flex>
-                            </v-layout>
-                            </v-timeline-item>
-                        </v-timeline>
-                    </v-flex>
-                </v-layout>
-
-            </v-container>
+            <div class="scroll-container">
+                <v-container fluid grid-list-xl>
+                    <v-layout column>
+                        <v-flex xs12>
+                            <div class="headline font-weight-bold">Hospital Timeline</div>
+                        </v-flex>
+                        <v-flex xs12>
+                            <v-timeline dense clipped>
+                                <v-timeline-item
+                                v-for="activity in timelineData"
+                                :color="getTimelinePointColor(activity.type)"
+                                :key="activity['.key']"
+                                @click.native="onTimelineItemClick(activity)"
+                                small>
+                                <v-layout pt-3>
+                                    <v-flex xs4>
+                                        <strong>{{getTimestampFormatted(activity.timestamp.toDate())}}</strong>
+                                    </v-flex>
+                                    <v-flex>
+                                        <strong>{{activity.title}}</strong>
+                                        <div class="caption">{{activity.content}}</div>
+                                    </v-flex>
+                                </v-layout>
+                                </v-timeline-item>
+                            </v-timeline>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </div>
         </v-content>
     </v-app>
 </template>
