@@ -1,19 +1,26 @@
 <template>
     <v-layout row wrap>
         <v-flex xs12>
-            <v-card>
-                <v-card-text class="overflow-hidden py-0">
+            <v-card class="ads-container">
+                <v-card-text class="overflow py-0">
                     <v-layout row align-content-center class="horiz-scroll">
-                    <v-flex
-                    v-for="offer in offers"
+
+                    <v-flex xs12 v-for="offer in offers"
                     :key="offer.id"
                     px-1
                     pb-2>
-                        <div class="img-container">
-                            <img :src="offer.img" height="100" width="200">
-                            <div class="top-left subheading font-weight-bold">{{offer.title}}</div>
-                        </div>
+                        <v-card class="white--text ads-container">
+                            <v-img :src="adUrl" width="200" height="120" contain="false">
+                                <v-img :src="offer.img" width="200" height="120" contain="false">
+                                    <v-card-title primary-title>
+                                        <div class="headline font-weight-black">{{offer.title}}</div>
+                                        <div>{{offer.content}}</div>
+                                    </v-card-title>
+                                </v-img>
+                            </v-img>
+                        </v-card>
                     </v-flex>
+
                     </v-layout>
                 </v-card-text>
             </v-card>
@@ -21,22 +28,16 @@
 
         <v-flex xs12 v-for="category in categories" :key="category['.key']">
             <v-card @click.native="onCatClick(category.name)">
-                <v-card-text>
-                    <div class="img-container">
-                            <img :src="category.img" height="100" width="200">
-                            <div class="top-left subheading font-weight-bold">{{category.name}}</div>
-                    </div>
-                </v-card-text>
+                <v-img :src="category.img" height="110px"/>
+                <div class="top-left title font-weight-black white--text">{{category.name}}</div>
             </v-card>
         </v-flex>
-
-
-
     </v-layout>
 </template>
 
 <script>
-import { firestore } from '../../services'
+import { firestore, firebase } from '../../services'
+
 export default {
     name: 'Discover',
     data () {
@@ -44,19 +45,30 @@ export default {
             loading: false,
             categories: [],
             error: null,
+            adUrl: 'https://firebasestorage.googleapis.com/v0/b/dt-livia.appspot.com/o/categories%2Fadvertisements%2Fa-gift.png?alt=media&token=96f21448-6912-4a1c-91d4-0e2e516a543f',
             offers: [
                 {
                     id: 0,
                     title: '20% off',
                     content: 'Receive a free voucher for your next Rossmann visit',
-                    img: '#'
+                    img: '#',
+                    imgRef: 'rossmann.png'
+                },
+                {
+                    id: 1,
+                    title: '1 photo free',
+                    content: 'Get one printed photo for free on your next visit',
+                    img: '#',
+                    imgRef: 'dm.png'
                 },
                 {
                     id: 2,
-                    title: 'DM Coupon',
-                    content: 'Or rather DM?',
-                    img: '#'
+                    title: '5% off',
+                    content: 'Receive 5% off your next order',
+                    img: '#',
+                    imgRef: 'docmorris.png'
                 }
+
             ]
         }
     },
@@ -65,6 +77,9 @@ export default {
             categories: firestore.collection('categories')
         }
     },
+    created: function () {
+        this.changeImg()
+    },
     methods: {
         onCatClick: function (sCatName) {
             this.$router.push({
@@ -72,6 +87,18 @@ export default {
                 params: {
                     catName: sCatName
                 }
+            })
+        },
+        changeImg: function () {
+            // Point to categories in storage
+            var imagesRef = firebase.storage().ref().child('categories/advertisements')
+
+            // iterate over every element for picture in horizontal slider
+            this.offers.forEach(function (i) {
+                var spaceRef = imagesRef.child(i.imgRef)
+                spaceRef.getDownloadURL().then(function (url) {
+                    i.img = url
+                })
             })
         }
     }
@@ -97,5 +124,17 @@ export default {
     position: absolute;
     top: 26px;
     left: 26px;
+}
+.card-text {
+    height:100px;
+    width:300px;
+}
+.ads-container {
+    background-color:#FAFAFA;
+    box-shadow: none;
+    height:120px;
+}
+.ad-container {
+    border-radius:10px;
 }
 </style>
