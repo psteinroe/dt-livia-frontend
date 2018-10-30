@@ -4,22 +4,62 @@
         <v-layout row wrap>
             <v-flex xs6>
                 <router-link to="/notes">
-                    <span class="subheading font-weight-bold">Notes</span>
+                    <v-layout row>
+                        <v-flex xs6>
+                            <span class="subheading font-weight-bold">Notes</span>
+                        </v-flex>
+                        <v-flex xs6>
+                            <div class="counterContainer ccNotes">
+                                <p class="counterText">
+                                    {{ countNotes }}
+                                </p>
+                            </div>
+                        </v-flex>
+                    </v-layout>
                 </router-link>
             </v-flex>
             <v-flex xs6>
                 <router-link to="/saved">
-                    <span class="subheading font-weight-bold">Saved Articles</span>
+                    <v-layout row>
+                        <v-flex xs9>
+                            <span class="subheading font-weight-bold">Saved Articles</span>
+                        </v-flex>
+                        <v-flex xs3>
+                            <div class="counterContainer ccSaved">
+                                <p class="counterText">
+                                    {{ countSaved }}
+                                </p>
+                            </div>
+                        </v-flex>
+                    </v-layout>
                 </router-link>
             </v-flex>
             <v-flex xs6>
                 <router-link to="/timeline">
-                    <span class="subheading font-weight-bold">Timeline</span>
+                    <v-layout row>
+                        <v-flex xs6>
+                            <span class="subheading font-weight-bold">Timeline</span>
+                        </v-flex>
+                        <v-flex xs6>
+                            <div class="counterContainer ccTimeline">
+                                <p class="counterText">
+                                    {{ countTimeline }}
+                                </p>
+                            </div>
+                        </v-flex>
+                    </v-layout>
                 </router-link>
             </v-flex>
             <v-flex xs6>
                 <router-link to="/surprise">
-                    <span class="subheading font-weight-bold">Surprise me</span>
+                    <v-layout row>
+                        <v-flex xs9>
+                            <span class="subheading font-weight-bold">Surprise me</span>
+                        </v-flex>
+                        <v-flex xs3>
+                            <img src="./../../../static/img/home/baseline-healing-24px.svg">
+                        </v-flex>
+                    </v-layout>
                 </router-link>
             </v-flex>
         </v-layout>
@@ -76,8 +116,23 @@ export default {
             user: firestore.collection('users').doc(this.$userId),
             hospitalStay: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'hospital').orderBy('timestamp', 'desc').limit(1),
             lastRead: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'article').orderBy('timestamp', 'desc').limit(1),
-            upcomingEvents: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'event').where('timestamp', '>=', new Date()).orderBy('timestamp', 'asc')
+            upcomingEvents: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'event').where('timestamp', '>=', new Date()).orderBy('timestamp', 'asc'),
+            countNotes: 0,
+            countTimeline: 0,
+            countSaved: 0
         }
+    },
+    created: function () {
+        // this is not best practice. One should create a firestore function to store the counts
+        firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'note').get().then(querySnapshot => {
+            this.countNotes = querySnapshot.size
+        })
+        firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'event').get().then(querySnapshot => {
+            this.countTimeline = querySnapshot.size
+        })
+        firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'article').get().then(querySnapshot => {
+            this.countSaved = querySnapshot.size
+        })
     },
     computed: {
         lastReadTest () {
@@ -154,5 +209,30 @@ a {
 
 .main-tiles {
     border-radius: 10px;
+}
+
+.counterContainer {
+    width:24px;
+    height:24px;
+    border-radius:100%;
+    line-height: 24px;
+    text-align: center;
+}
+
+.ccNotes {
+    background-color:#34BBDE;
+}
+
+.ccTimeline {
+    background-color:#FF5959;
+}
+
+.ccSaved {
+    background-color:#39967C;
+}
+
+.counterText {
+    color:white;
+    font-weight:bold;
 }
 </style>
