@@ -25,7 +25,7 @@
         </v-layout>
     </v-flex>
             <v-flex xs12>
-                <v-card @click.native="onHospitalStayClick" class="main-tiles" color="#34BBDE">
+                <v-card @click.native="onHospitalStayClick" class="main-tiles white--text" color="#34BBDE">
                     <v-card-text v-if="this.hospitalStay && this.hospitalStay[0] && this.hospitalStay[0].current">
                         <div class="subheading font-weight-bold">Your Hospital Stay</div>
                         <ul>
@@ -41,7 +41,7 @@
                 </v-card>
             </v-flex>
             <v-flex xs12>
-                <v-card to="/timeline" class="main-tiles" color="#FF5959">
+                <v-card to="/timeline" class="main-tiles white--text" color="#FF5959">
                     <v-card-text v-if="upcomingEvents.length > 0">
                         <div class="subheading font-weight-bold">Next Events</div>
                         <ul>
@@ -54,7 +54,7 @@
                 </v-card>
             </v-flex>
             <v-flex xs12 v-if="this.lastRead && this.lastRead[0]">
-                <v-card class="main-tiles" color="#39967C" :href="lastRead[0].url">
+                <v-card class="main-tiles white--text" color="#39967C" :href="lastRead[0].url">
                     <v-card-text>
                         <div class="subheading font-weight-bold">Last Read: {{lastRead[0].title}}</div>
                         <p>{{lastRead[0].content}}</p>
@@ -154,6 +154,5 @@ a {
 
 .main-tiles {
     border-radius: 10px;
-    color: white;
 }
 </style>
