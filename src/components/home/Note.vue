@@ -34,13 +34,25 @@
                         </v-form>
                     </v-flex>
                     <v-flex xs12 v-if="note.links">
-                        <div class="caption">Relevant Links:</div>
+                        <v-card class="main-tiles white--text" color="#34BBDE">
+                            <v-card-text>
+                                <div class="subheading font-weight-bold mb-1">Interesting Reads</div>
+                                <div v-for="(link, index) in note.links" :key="index" class="pl-1">
+                                    <a :href="link.url" class="linkText">
+                                    <v-layout row>
+                                        <v-flex xs11>
+                                            <span>{{link.name}}</span>
+                                        </v-flex>
+                                        <v-flex xs1>
+                                            <v-icon color="white">keyboard_arrow_right</v-icon>
+                                        </v-flex>
+                                    </v-layout>
+                                    </a>
+                                </div>
+                            </v-card-text>
+                        </v-card>
                     </v-flex>
-                    <v-flex xs12 v-if="note.links">
-                        <ul>
-                            <li v-for="(link, index) in note.links" :key="index"><a :href="link.url">{{link.name}}</a></li>
-                        </ul>
-                    </v-flex>
+
                 </v-layout>
             </v-container>
         </v-content>
@@ -129,6 +141,13 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
+.linkText {
+    color: white;/*#9D9EA1;*/
+    text-decoration: none;
+}
 
+.main-tiles {
+    border-radius: 10px;
+}
 </style>
