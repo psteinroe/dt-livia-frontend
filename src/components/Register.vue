@@ -16,6 +16,7 @@
                     label="E-Mail"
                     v-model="email"
                     type="text"
+                    solo
                 ></v-text-field>
             </v-flex>
             <v-flex xs12>
@@ -23,6 +24,8 @@
                     label="Password"
                     v-model="password"
                     type="password"
+                    solo
+                    hint="At least 8 characters"
                 ></v-text-field>
             </v-flex>
             <v-layout row justify-center>
@@ -82,10 +85,10 @@ export default {
 }
 
 .registerLinkI {
-    color: #9D9EA1;
+    color: #9d9ea1;
 }
 
 .registerLinkII {
-    color: #FF5959;
+    color: #ff5959;
 }
 </style>
