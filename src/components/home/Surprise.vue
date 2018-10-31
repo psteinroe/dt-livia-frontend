@@ -2,25 +2,32 @@
 <v-app>
     <v-toolbar app>
         <v-btn @click="$router.go(-1)" icon>
-            <v-icon>arrow_back</v-icon>
+            <v-icon>keyboard_arrow_left</v-icon>
         </v-btn>
-        <v-toolbar-title>Home</v-toolbar-title>
+        <v-toolbar-title class="subheading">Home</v-toolbar-title>
     </v-toolbar>
     <v-content>
-        <v-layout column>
-            <v-layout row>
+        <v-container fluid>
+            <v-layout column>
                 <v-flex xs12>
-                    <div class="text-xs-center">
-                        <v-img :src="imageSrc" contain/>
-                    </div>
+                    <div class="headline font-weight-bold">Surpise</div>
                 </v-flex>
             </v-layout>
-            <v-layout row>
-                <v-flex xs12>
-                    <v-btn absolute color="#FF5959" dark v-on:click="getUrl">Give me a new one!</v-btn>
-                </v-flex>
+            <v-layout column>
+                <v-layout row>
+                    <v-flex xs12>
+                        <div class="text-xs-center">
+                            <v-img :src="imageSrc" contain/>
+                        </div>
+                    </v-flex>
+                </v-layout>
+                <v-layout row justify-center>
+                    <v-flex align-content-center text-xs-center>
+                        <v-btn color="#FF5959" dark v-on:click="getUrl">Give me a new one!</v-btn>
+                    </v-flex>
+                </v-layout>
             </v-layout>
-        </v-layout>
+        </v-container>
     </v-content>
 </v-app>
 </template>
@@ -54,8 +61,4 @@ export default {
 </script>
 
 <style scoped>
-button {
-    bottom: 64px;
-    left: 25%;
-}
 </style>

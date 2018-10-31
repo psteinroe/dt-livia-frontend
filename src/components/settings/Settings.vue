@@ -60,14 +60,26 @@
               <v-list-tile-title @click="logout" class="red--text">Logout</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-
         </v-list>
+        <v-layout row justify-center>
+            <v-dialog v-model="dialog" max-width="290">
+            <v-btn @click="dialog = true" slot="activator" color="#FF5959" dark class="bottom-button">Delete Account</v-btn>
+            <v-card>
+                <v-card-title class="headline">Do you really want to delete your account?</v-card-title>
+                <v-card-text>By agreeing to this action, all your data will be deleted as well as your account. This action cannot be undone.</v-card-text>
+                <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="red darken-1" flat @click="deleteAccount">Agree</v-btn>
+                </v-card-actions>
+            </v-card>
+            </v-dialog>
+        </v-layout>
     </v-flex>
 </v-layout>
 </template>
 
 <script>
-import {auth} from '../../services'
+import {auth, firebase} from '../../services'
 
 export default {
     name: 'Settings',
@@ -86,10 +98,17 @@ export default {
             }, function (error) {
                 console.log(error)
             })
+        },
+        deleteAccount: function () {
+            const oUser = firebase.auth().currentUser
+            oUser.delete()
         }
     }
 }
 </script>
 
 <style scoped>
+.bottom-button {
+    margin-top: 10rem;
+}
 </style>
