@@ -28,13 +28,13 @@
                     </v-flex>
                     <v-flex xs12>
                         <v-form ref="form" v-model="valid">
-                            <v-text-field required :rules="titleRules" class="display-1" v-model="note.title" placeholder="Title" />
+                            <v-text-field required :rules="titleRules" class="display-1 note-title" v-model="note.title" placeholder="Title" />
                             <div v-if="note.timestamp" class="subtitle">{{getTimestampFormatted(note.timestamp.toDate())}}</div>
-                            <v-textarea required :rules="contentRules" class="subheading" v-model="note.content" placeholder="Content" />
+                            <v-textarea solo auto-grow required :rules="contentRules" class="subheading" v-model="note.content" placeholder="Content" />
                         </v-form>
                     </v-flex>
                     <v-flex xs12 v-if="note.links">
-                        <v-card class="main-tiles white--text" color="#34BBDE">
+                        <v-card class="main-tiles white--text note-links" color="#34BBDE">
                             <v-card-text>
                                 <div class="subheading font-weight-bold mb-1">Interesting Reads</div>
                                 <div v-for="(link, index) in note.links" :key="index" class="pl-1">
@@ -143,11 +143,20 @@ export default {
 
 <style scoped>
 .linkText {
-    color: white;/*#9D9EA1;*/
+    color: white; /*#9D9EA1;*/
     text-decoration: none;
 }
 
 .main-tiles {
     border-radius: 10px;
+}
+
+.note-title {
+    font-weight: 900;
+    margin-bottom: 2rem;
+}
+
+.note-links {
+    margin-top: 6rem;
 }
 </style>
