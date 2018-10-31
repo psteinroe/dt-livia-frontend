@@ -25,7 +25,7 @@
                     v-model="password"
                     type="password"
                     solo
-                    hint="At least 8 characters"
+                    hint="At least 6 characters"
                 ></v-text-field>
             </v-flex>
             <v-layout row justify-center>
@@ -64,7 +64,7 @@ export default {
         register: async function () {
             try {
                 await auth.createUserWithEmailAndPassword(this.email, this.password)
-                alert('Registration successful. Please login')
+                alert('Registration successful.')
                 this.$router.replace('/Login')
             } catch (err) {
                 alert(err.message)
