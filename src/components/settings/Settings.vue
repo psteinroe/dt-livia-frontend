@@ -63,13 +63,14 @@
         </v-list>
         <v-layout row justify-center>
             <v-dialog v-model="dialog" max-width="290">
-            <v-btn @click="dialog = true" slot="activator" color="#FF5959" dark class="bottom-button">Delete Account</v-btn>
+            <v-btn slot="activator" color="#FF5959" dark flat class="bottom-button">Delete Account</v-btn>
             <v-card>
                 <v-card-title class="headline">Do you really want to delete your account?</v-card-title>
                 <v-card-text>By agreeing to this action, all your data will be deleted as well as your account. This action cannot be undone.</v-card-text>
                 <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="red darken-1" flat @click="deleteAccount">Agree</v-btn>
+                <v-btn color="grey" flat @click="dialog = false">Cancel</v-btn>
                 </v-card-actions>
             </v-card>
             </v-dialog>
@@ -88,7 +89,8 @@ export default {
             news: false,
             events: false,
             updates: false,
-            newsletter: false
+            newsletter: false,
+            dialog: false
         }
     },
     methods: {
@@ -102,6 +104,9 @@ export default {
         deleteAccount: function () {
             const oUser = firebase.auth().currentUser
             oUser.delete()
+        },
+        close: function () {
+            console.log('Closed.')
         }
     }
 }
