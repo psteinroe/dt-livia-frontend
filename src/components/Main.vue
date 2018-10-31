@@ -50,7 +50,12 @@ export default {
 }
 
 .navText {
-    color:#FF5959;
+    color: #ff5959;
     font-weight: 700;
+}
+
+.v-toolbar__title {
+    font-weight: 900;
+    font-size: 2rem;
 }
 </style>
