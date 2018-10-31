@@ -111,15 +111,19 @@ import formatter from '../../mixins/formatter'
 export default {
     name: 'Home',
     mixins: [formatter],
+    data () {
+        return {
+            countNotes: 0,
+            countTimeline: 0,
+            countSaved: 0
+        }
+    },
     firestore () {
         return {
             user: firestore.collection('users').doc(this.$userId),
             hospitalStay: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'hospital').orderBy('timestamp', 'desc').limit(1),
             lastRead: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'article').orderBy('timestamp', 'desc').limit(1),
-            upcomingEvents: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'event').where('timestamp', '>=', new Date()).orderBy('timestamp', 'asc'),
-            countNotes: 0,
-            countTimeline: 0,
-            countSaved: 0
+            upcomingEvents: firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'event').where('timestamp', '>=', new Date()).orderBy('timestamp', 'asc')
         }
     },
     created: function () {
@@ -133,6 +137,7 @@ export default {
         firestore.collection('users').doc(this.$userId).collection('activities').where('type', '==', 'article').get().then(querySnapshot => {
             this.countSaved = querySnapshot.size
         })
+        this.counted = true
     },
     computed: {
         lastReadTest () {
