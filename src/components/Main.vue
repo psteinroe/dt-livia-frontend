@@ -10,18 +10,18 @@
                 </v-container>
             </div>
         </v-content>
-        <v-bottom-nav :active-sync="bottomNav" app :value="true" color="grey lighten-2">
+        <v-bottom-nav :active-sync="bottomNav" app :value="true" color="#f8f8f8">
             <v-btn to="/" value="home">
-                <span>Home</span>
-                <v-icon medium dark>home</v-icon>
+                <span class="navText">Home</span>
+                <v-icon medium color="#FF5959">home</v-icon>
             </v-btn>
             <v-btn to="/discover" value="discover">
-                <span>Discover</span>
-                <v-icon medium dark>search</v-icon>
+                <span class="navText">Discover</span>
+                <v-icon medium color="#FF5959">search</v-icon>
             </v-btn>
             <v-btn to="/settings" value="settings">
-                <span>Settings</span>
-                <v-icon medium dark>settings</v-icon>
+                <span class="navText">Settings</span>
+                <v-icon medium color="#FF5959">settings</v-icon>
             </v-btn>
         </v-bottom-nav> 
     </v-app>
@@ -47,5 +47,10 @@ export default {
     height: 100%;
     overflow-y: scroll;
     backface-visibility: hidden;
+}
+
+.navText {
+    color:#FF5959;
+    font-weight: 700;
 }
 </style>
