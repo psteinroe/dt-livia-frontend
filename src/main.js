@@ -9,6 +9,7 @@ import VueFirestore from 'vue-firestore'
 import {auth, firestore} from './services'
 import SocialSharing from 'vue-social-sharing'
 import AsyncComputed from 'vue-async-computed'
+import './assets/stylus/main.styl'
 
 Vue.use(AsyncComputed)
 Vue.use(SocialSharing)
