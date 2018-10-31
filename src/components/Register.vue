@@ -27,13 +27,16 @@
             </v-flex>
             <v-layout row justify-center>
                 <v-flex xs4>
-                    <v-btn @click="register" block>Register</v-btn>
+                    <v-btn @click="register" block color="#42B54E" class="white--text">Register</v-btn>
                 </v-flex>
             </v-layout>
             <v-layout row justify-center>
-            <v-flex xs7 align-content-center>
-                <router-link to="/Login">
-                    <div>Already a user? Login here!</div>
+            <v-flex xs7 align-content-center text-xs-center >
+                <router-link to="/Login" class="loginLink">
+                    <div>
+                        <span class="registerLinkI">Already a user?</span>
+                        <span class="registerLinkII">Login</span>
+                    </div>
                 </router-link>
             </v-flex>
         </v-layout>
@@ -70,4 +73,19 @@ export default {
 </script>
 
 <style>
+.text {
+    font-weight: 500;
+}
+
+.loginLink {
+    text-decoration: none;
+}
+
+.registerLinkI {
+    color: #9D9EA1;
+}
+
+.registerLinkII {
+    color: #FF5959;
+}
 </style>

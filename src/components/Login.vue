@@ -1,6 +1,6 @@
 <template>
 <v-app>
-    <v-content>
+    <v-content class="text">
         <v-container grid-list-xl>
     <v-layout column justify-center>
         <v-layout mt-5 row justify-center>
@@ -26,14 +26,17 @@
             ></v-text-field>
         </v-flex>
         <v-layout row justify-center>
-            <v-flex xs4>
-                <v-btn @click="login" block>Login</v-btn>
+            <v-flex xs4 align-content-center text-xs-center>
+                <v-btn @click="login" color="#42B54E" class="white--text">Login</v-btn>
             </v-flex>
         </v-layout>
         <v-layout row justify-center>
-            <v-flex xs7 align-content-center>
-                <router-link to="/Register">
-                    <div>Not registered yet? Do it now!</div>
+            <v-flex xs7 align-content-center text-xs-center>
+                <router-link to="/Register" class="registerLink">
+                    <div>
+                        <span class="registerLinkI">Don't have an account?</span>
+                        <span class="registerLinkII">Sign up</span>
+                        </div>
                 </router-link>
             </v-flex>
         </v-layout>
@@ -69,4 +72,18 @@ export default {
 </script>
 
 <style>
+.text {
+    font-weight: 500;
+}
+.registerLink {
+    text-decoration: none;
+}
+
+.registerLinkI {
+    color: #9D9EA1;
+}
+
+.registerLinkII {
+    color: #FF5959;
+}
 </style>
