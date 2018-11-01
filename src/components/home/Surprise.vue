@@ -10,7 +10,7 @@
         <v-container fluid>
             <v-layout column>
                 <v-flex xs12>
-                    <div class="headline font-weight-bold">Surpise</div>
+                    <div class="headline font-weight-bold">Surprise</div>
                 </v-flex>
             </v-layout>
             <v-layout column>
