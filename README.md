@@ -28,6 +28,8 @@ serve dist
 firebase deploy
 ```
 
+_For running the app make sure to have the .env file with all firebase credentials moved to the root directory of the app._
+
 
 ## References
 ### Stuff you need to understand
