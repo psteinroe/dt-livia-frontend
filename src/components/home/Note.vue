@@ -28,7 +28,7 @@
                     </v-flex>
                     <v-flex xs12>
                         <v-form ref="form" v-model="valid">
-                            <v-text-field required :rules="titleRules" class="display-1 note-title" v-model="note.title" placeholder="Title" />
+                            <v-text-field required :rules="titleRules" class="note-title" v-model="note.title" placeholder="Title" />
                             <div v-if="note.timestamp" class="subtitle">{{getTimestampFormatted(note.timestamp.toDate())}}</div>
                             <v-textarea solo auto-grow required :rules="contentRules" class="subheading" v-model="note.content" placeholder="Content" />
                         </v-form>
@@ -157,6 +157,6 @@ export default {
 }
 
 .note-links {
-    margin-top: 6rem;
+    margin-top: 4rem;
 }
 </style>

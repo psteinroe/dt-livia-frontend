@@ -28,7 +28,7 @@
                     </v-flex>
                     <v-flex xs12>
                         <v-form ref="form" v-model="valid">
-                            <v-text-field required :rules="titleRules" class="display-1" v-model="event.title" placeholder="Title" />
+                            <v-text-field required :rules="titleRules" class="event-title" v-model="event.title" placeholder="Title" />
                             <v-dialog
                             ref="dialog"
                             v-model="modal"
@@ -71,10 +71,16 @@
                                     <v-btn flat color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
                                 </v-time-picker>
                             </v-dialog>
-                            <v-textarea required :rules="descriptionRules" class="subheading" v-model="event.content" placeholder="Description" />
+                            <v-textarea solo auto-grow required :rules="descriptionRules" class="subheading" v-model="event.content" placeholder="Description" />
                         </v-form>
                     </v-flex>
                 </v-layout>
+                <v-layout row justify-center>
+                    <v-flex align-content-center text-xs-center>
+                        <v-btn color="#FF5959" dark v-on:click="onBack">Save</v-btn>
+                    </v-flex>
+                </v-layout>
+            </v-layout>
             </v-container>
         </v-content>
     </v-app>
@@ -173,6 +179,8 @@ export default {
 </script>
 
 
-<style>
-
+<style scoped>
+.event-title {
+    font-weight: 900;
+}
 </style>
