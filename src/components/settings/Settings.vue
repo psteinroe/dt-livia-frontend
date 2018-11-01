@@ -69,8 +69,8 @@
                 <v-card-text>By agreeing to this action, all your data will be deleted as well as your account. This action cannot be undone.</v-card-text>
                 <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="red darken-1" flat @click="deleteAccount">Agree</v-btn>
                 <v-btn color="grey" flat @click="dialog = false">Cancel</v-btn>
+                <v-btn color="red darken-1" flat @click="deleteAccount">Agree</v-btn>
                 </v-card-actions>
             </v-card>
             </v-dialog>
