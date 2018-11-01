@@ -70,7 +70,9 @@
                         <div class="subheading font-weight-bold">Your Hospital Stay</div>
                         <ul>
                             <li><span class="font-weight-bold">Diagnose:</span> {{this.hospitalStay[0].content}}</li>
-                            <li><span class="font-weight-bold">Stay Since:</span> {{getTimestampFormatted(this.hospitalStay[0].timestamp.toDate())}} ({{stayInDays}} Days)</li>
+                            <li><span class="font-weight-bold">Stay Since:</span> {{getTimestampFormatted(this.hospitalStay[0].timestamp.toDate())}} ({{stayInDays}}
+                                <span v-if="stayInDays > 1">Days</span>
+                                <span v-else>Day</span>)</li>
                             <li><span class="font-weight-bold">Related Articles:</span> {{this.countSaved}}</li>
                             <li><span class="font-weight-bold">Related Notes:</span> {{this.countNotes}}</li>
                         </ul>
