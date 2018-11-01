@@ -71,8 +71,8 @@
                         <ul>
                             <li><span class="font-weight-bold">Diagnose:</span> {{this.hospitalStay[0].content}}</li>
                             <li><span class="font-weight-bold">Stay Since:</span> {{getTimestampFormatted(this.hospitalStay[0].timestamp.toDate())}} ({{stayInDays}} Days)</li>
-                            <li><span class="font-weight-bold">Related Articles:</span> {{this.hospitalStay[0].relatedArticlesCount}}</li>
-                            <li><span class="font-weight-bold">Related Notes:</span> {{this.hospitalStay[0].relatedNotesCount}}</li>
+                            <li><span class="font-weight-bold">Related Articles:</span> {{this.countSaved}}</li>
+                            <li><span class="font-weight-bold">Related Notes:</span> {{this.countNotes}}</li>
                         </ul>
                     </v-card-text>
                     <v-card-text v-else>
